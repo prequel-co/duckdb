@@ -633,12 +633,12 @@ void SizeStatistics::__set_unencoded_byte_array_data_bytes(const int64_t val) {
 __isset.unencoded_byte_array_data_bytes = true;
 }
 
-void SizeStatistics::__set_repetition_level_histogram(const std::vector<int64_t> & val) {
+void SizeStatistics::__set_repetition_level_histogram(const duckdb::vector<int64_t> & val) {
   this->repetition_level_histogram = val;
 __isset.repetition_level_histogram = true;
 }
 
-void SizeStatistics::__set_definition_level_histogram(const std::vector<int64_t> & val) {
+void SizeStatistics::__set_definition_level_histogram(const duckdb::vector<int64_t> & val) {
   this->definition_level_histogram = val;
 __isset.definition_level_histogram = true;
 }
@@ -744,7 +744,7 @@ uint32_t SizeStatistics::write(::apache::thrift::protocol::TProtocol* oprot) con
     xfer += oprot->writeFieldBegin("repetition_level_histogram", ::apache::thrift::protocol::T_LIST, 2);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I64, static_cast<uint32_t>(this->repetition_level_histogram.size()));
-      std::vector<int64_t> ::const_iterator _iter10;
+      duckdb::vector<int64_t> ::const_iterator _iter10;
       for (_iter10 = this->repetition_level_histogram.begin(); _iter10 != this->repetition_level_histogram.end(); ++_iter10)
       {
         xfer += oprot->writeI64((*_iter10));
@@ -757,7 +757,7 @@ uint32_t SizeStatistics::write(::apache::thrift::protocol::TProtocol* oprot) con
     xfer += oprot->writeFieldBegin("definition_level_histogram", ::apache::thrift::protocol::T_LIST, 3);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I64, static_cast<uint32_t>(this->definition_level_histogram.size()));
-      std::vector<int64_t> ::const_iterator _iter11;
+      duckdb::vector<int64_t> ::const_iterator _iter11;
       for (_iter11 = this->definition_level_histogram.begin(); _iter11 != this->definition_level_histogram.end(); ++_iter11)
       {
         xfer += oprot->writeI64((*_iter11));
@@ -777,23 +777,6 @@ void swap(SizeStatistics &a, SizeStatistics &b) {
   swap(a.repetition_level_histogram, b.repetition_level_histogram);
   swap(a.definition_level_histogram, b.definition_level_histogram);
   swap(a.__isset, b.__isset);
-}
-
-bool SizeStatistics::operator==(const SizeStatistics & rhs) const
-{
-  if (__isset.unencoded_byte_array_data_bytes != rhs.__isset.unencoded_byte_array_data_bytes)
-    return false;
-  else if (__isset.unencoded_byte_array_data_bytes && !(unencoded_byte_array_data_bytes == rhs.unencoded_byte_array_data_bytes))
-    return false;
-  if (__isset.repetition_level_histogram != rhs.__isset.repetition_level_histogram)
-    return false;
-  else if (__isset.repetition_level_histogram && !(repetition_level_histogram == rhs.repetition_level_histogram))
-    return false;
-  if (__isset.definition_level_histogram != rhs.__isset.definition_level_histogram)
-    return false;
-  else if (__isset.definition_level_histogram && !(definition_level_histogram == rhs.definition_level_histogram))
-    return false;
-  return true;
 }
 
 SizeStatistics::SizeStatistics(const SizeStatistics& other12) {
@@ -1039,43 +1022,6 @@ void swap(Statistics &a, Statistics &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool Statistics::operator==(const Statistics & rhs) const
-{
-  if (__isset.max != rhs.__isset.max)
-    return false;
-  else if (__isset.max && !(max == rhs.max))
-    return false;
-  if (__isset.min != rhs.__isset.min)
-    return false;
-  else if (__isset.min && !(min == rhs.min))
-    return false;
-  if (__isset.null_count != rhs.__isset.null_count)
-    return false;
-  else if (__isset.null_count && !(null_count == rhs.null_count))
-    return false;
-  if (__isset.distinct_count != rhs.__isset.distinct_count)
-    return false;
-  else if (__isset.distinct_count && !(distinct_count == rhs.distinct_count))
-    return false;
-  if (__isset.max_value != rhs.__isset.max_value)
-    return false;
-  else if (__isset.max_value && !(max_value == rhs.max_value))
-    return false;
-  if (__isset.min_value != rhs.__isset.min_value)
-    return false;
-  else if (__isset.min_value && !(min_value == rhs.min_value))
-    return false;
-  if (__isset.is_max_value_exact != rhs.__isset.is_max_value_exact)
-    return false;
-  else if (__isset.is_max_value_exact && !(is_max_value_exact == rhs.is_max_value_exact))
-    return false;
-  if (__isset.is_min_value_exact != rhs.__isset.is_min_value_exact)
-    return false;
-  else if (__isset.is_min_value_exact && !(is_min_value_exact == rhs.is_min_value_exact))
-    return false;
-  return true;
-}
-
 Statistics::Statistics(const Statistics& other14) {
   max = other14.max;
   min = other14.min;
@@ -1170,11 +1116,6 @@ void swap(StringType &a, StringType &b) {
   (void) b;
 }
 
-bool StringType::operator==(const StringType & /* rhs */) const
-{
-  return true;
-}
-
 StringType::StringType(const StringType& other16) noexcept {
   (void) other16;
 }
@@ -1243,11 +1184,6 @@ void swap(UUIDType &a, UUIDType &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool UUIDType::operator==(const UUIDType & /* rhs */) const
-{
-  return true;
 }
 
 UUIDType::UUIDType(const UUIDType& other18) noexcept {
@@ -1320,11 +1256,6 @@ void swap(MapType &a, MapType &b) {
   (void) b;
 }
 
-bool MapType::operator==(const MapType & /* rhs */) const
-{
-  return true;
-}
-
 MapType::MapType(const MapType& other20) noexcept {
   (void) other20;
 }
@@ -1393,11 +1324,6 @@ void swap(ListType &a, ListType &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool ListType::operator==(const ListType & /* rhs */) const
-{
-  return true;
 }
 
 ListType::ListType(const ListType& other22) noexcept {
@@ -1470,11 +1396,6 @@ void swap(EnumType &a, EnumType &b) {
   (void) b;
 }
 
-bool EnumType::operator==(const EnumType & /* rhs */) const
-{
-  return true;
-}
-
 EnumType::EnumType(const EnumType& other24) noexcept {
   (void) other24;
 }
@@ -1543,11 +1464,6 @@ void swap(DateType &a, DateType &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool DateType::operator==(const DateType & /* rhs */) const
-{
-  return true;
 }
 
 DateType::DateType(const DateType& other26) noexcept {
@@ -1620,11 +1536,6 @@ void swap(Float16Type &a, Float16Type &b) {
   (void) b;
 }
 
-bool Float16Type::operator==(const Float16Type & /* rhs */) const
-{
-  return true;
-}
-
 Float16Type::Float16Type(const Float16Type& other28) noexcept {
   (void) other28;
 }
@@ -1693,11 +1604,6 @@ void swap(NullType &a, NullType &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool NullType::operator==(const NullType & /* rhs */) const
-{
-  return true;
 }
 
 NullType::NullType(const NullType& other30) noexcept {
@@ -1815,15 +1721,6 @@ void swap(DecimalType &a, DecimalType &b) {
   swap(a.precision, b.precision);
 }
 
-bool DecimalType::operator==(const DecimalType & rhs) const
-{
-  if (!(scale == rhs.scale))
-    return false;
-  if (!(precision == rhs.precision))
-    return false;
-  return true;
-}
-
 DecimalType::DecimalType(const DecimalType& other32) noexcept {
   scale = other32.scale;
   precision = other32.precision;
@@ -1898,11 +1795,6 @@ void swap(MilliSeconds &a, MilliSeconds &b) {
   (void) b;
 }
 
-bool MilliSeconds::operator==(const MilliSeconds & /* rhs */) const
-{
-  return true;
-}
-
 MilliSeconds::MilliSeconds(const MilliSeconds& other34) noexcept {
   (void) other34;
 }
@@ -1973,11 +1865,6 @@ void swap(MicroSeconds &a, MicroSeconds &b) {
   (void) b;
 }
 
-bool MicroSeconds::operator==(const MicroSeconds & /* rhs */) const
-{
-  return true;
-}
-
 MicroSeconds::MicroSeconds(const MicroSeconds& other36) noexcept {
   (void) other36;
 }
@@ -2046,11 +1933,6 @@ void swap(NanoSeconds &a, NanoSeconds &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool NanoSeconds::operator==(const NanoSeconds & /* rhs */) const
-{
-  return true;
 }
 
 NanoSeconds::NanoSeconds(const NanoSeconds& other38) noexcept {
@@ -2184,23 +2066,6 @@ void swap(TimeUnit &a, TimeUnit &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool TimeUnit::operator==(const TimeUnit & rhs) const
-{
-  if (__isset.MILLIS != rhs.__isset.MILLIS)
-    return false;
-  else if (__isset.MILLIS && !(MILLIS == rhs.MILLIS))
-    return false;
-  if (__isset.MICROS != rhs.__isset.MICROS)
-    return false;
-  else if (__isset.MICROS && !(MICROS == rhs.MICROS))
-    return false;
-  if (__isset.NANOS != rhs.__isset.NANOS)
-    return false;
-  else if (__isset.NANOS && !(NANOS == rhs.NANOS))
-    return false;
-  return true;
-}
-
 TimeUnit::TimeUnit(const TimeUnit& other40) noexcept {
   MILLIS = other40.MILLIS;
   MICROS = other40.MICROS;
@@ -2324,15 +2189,6 @@ void swap(TimestampType &a, TimestampType &b) {
   swap(a.unit, b.unit);
 }
 
-bool TimestampType::operator==(const TimestampType & rhs) const
-{
-  if (!(isAdjustedToUTC == rhs.isAdjustedToUTC))
-    return false;
-  if (!(unit == rhs.unit))
-    return false;
-  return true;
-}
-
 TimestampType::TimestampType(const TimestampType& other42) noexcept {
   isAdjustedToUTC = other42.isAdjustedToUTC;
   unit = other42.unit;
@@ -2449,15 +2305,6 @@ void swap(TimeType &a, TimeType &b) {
   using ::std::swap;
   swap(a.isAdjustedToUTC, b.isAdjustedToUTC);
   swap(a.unit, b.unit);
-}
-
-bool TimeType::operator==(const TimeType & rhs) const
-{
-  if (!(isAdjustedToUTC == rhs.isAdjustedToUTC))
-    return false;
-  if (!(unit == rhs.unit))
-    return false;
-  return true;
 }
 
 TimeType::TimeType(const TimeType& other44) noexcept {
@@ -2579,15 +2426,6 @@ void swap(IntType &a, IntType &b) {
   swap(a.isSigned, b.isSigned);
 }
 
-bool IntType::operator==(const IntType & rhs) const
-{
-  if (!(bitWidth == rhs.bitWidth))
-    return false;
-  if (!(isSigned == rhs.isSigned))
-    return false;
-  return true;
-}
-
 IntType::IntType(const IntType& other46) noexcept {
   bitWidth = other46.bitWidth;
   isSigned = other46.isSigned;
@@ -2662,11 +2500,6 @@ void swap(JsonType &a, JsonType &b) {
   (void) b;
 }
 
-bool JsonType::operator==(const JsonType & /* rhs */) const
-{
-  return true;
-}
-
 JsonType::JsonType(const JsonType& other48) noexcept {
   (void) other48;
 }
@@ -2735,11 +2568,6 @@ void swap(BsonType &a, BsonType &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool BsonType::operator==(const BsonType & /* rhs */) const
-{
-  return true;
 }
 
 BsonType::BsonType(const BsonType& other50) noexcept {
@@ -3082,67 +2910,6 @@ void swap(LogicalType &a, LogicalType &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool LogicalType::operator==(const LogicalType & rhs) const
-{
-  if (__isset.STRING != rhs.__isset.STRING)
-    return false;
-  else if (__isset.STRING && !(STRING == rhs.STRING))
-    return false;
-  if (__isset.MAP != rhs.__isset.MAP)
-    return false;
-  else if (__isset.MAP && !(MAP == rhs.MAP))
-    return false;
-  if (__isset.LIST != rhs.__isset.LIST)
-    return false;
-  else if (__isset.LIST && !(LIST == rhs.LIST))
-    return false;
-  if (__isset.ENUM != rhs.__isset.ENUM)
-    return false;
-  else if (__isset.ENUM && !(ENUM == rhs.ENUM))
-    return false;
-  if (__isset.DECIMAL != rhs.__isset.DECIMAL)
-    return false;
-  else if (__isset.DECIMAL && !(DECIMAL == rhs.DECIMAL))
-    return false;
-  if (__isset.DATE != rhs.__isset.DATE)
-    return false;
-  else if (__isset.DATE && !(DATE == rhs.DATE))
-    return false;
-  if (__isset.TIME != rhs.__isset.TIME)
-    return false;
-  else if (__isset.TIME && !(TIME == rhs.TIME))
-    return false;
-  if (__isset.TIMESTAMP != rhs.__isset.TIMESTAMP)
-    return false;
-  else if (__isset.TIMESTAMP && !(TIMESTAMP == rhs.TIMESTAMP))
-    return false;
-  if (__isset.INTEGER != rhs.__isset.INTEGER)
-    return false;
-  else if (__isset.INTEGER && !(INTEGER == rhs.INTEGER))
-    return false;
-  if (__isset.UNKNOWN != rhs.__isset.UNKNOWN)
-    return false;
-  else if (__isset.UNKNOWN && !(UNKNOWN == rhs.UNKNOWN))
-    return false;
-  if (__isset.JSON != rhs.__isset.JSON)
-    return false;
-  else if (__isset.JSON && !(JSON == rhs.JSON))
-    return false;
-  if (__isset.BSON != rhs.__isset.BSON)
-    return false;
-  else if (__isset.BSON && !(BSON == rhs.BSON))
-    return false;
-  if (__isset.UUID != rhs.__isset.UUID)
-    return false;
-  else if (__isset.UUID && !(UUID == rhs.UUID))
-    return false;
-  if (__isset.FLOAT16 != rhs.__isset.FLOAT16)
-    return false;
-  else if (__isset.FLOAT16 && !(FLOAT16 == rhs.FLOAT16))
-    return false;
-  return true;
-}
-
 LogicalType::LogicalType(const LogicalType& other52) noexcept {
   STRING = other52.STRING;
   MAP = other52.MAP;
@@ -3465,49 +3232,6 @@ void swap(SchemaElement &a, SchemaElement &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool SchemaElement::operator==(const SchemaElement & rhs) const
-{
-  if (__isset.type != rhs.__isset.type)
-    return false;
-  else if (__isset.type && !(type == rhs.type))
-    return false;
-  if (__isset.type_length != rhs.__isset.type_length)
-    return false;
-  else if (__isset.type_length && !(type_length == rhs.type_length))
-    return false;
-  if (__isset.repetition_type != rhs.__isset.repetition_type)
-    return false;
-  else if (__isset.repetition_type && !(repetition_type == rhs.repetition_type))
-    return false;
-  if (!(name == rhs.name))
-    return false;
-  if (__isset.num_children != rhs.__isset.num_children)
-    return false;
-  else if (__isset.num_children && !(num_children == rhs.num_children))
-    return false;
-  if (__isset.converted_type != rhs.__isset.converted_type)
-    return false;
-  else if (__isset.converted_type && !(converted_type == rhs.converted_type))
-    return false;
-  if (__isset.scale != rhs.__isset.scale)
-    return false;
-  else if (__isset.scale && !(scale == rhs.scale))
-    return false;
-  if (__isset.precision != rhs.__isset.precision)
-    return false;
-  else if (__isset.precision && !(precision == rhs.precision))
-    return false;
-  if (__isset.field_id != rhs.__isset.field_id)
-    return false;
-  else if (__isset.field_id && !(field_id == rhs.field_id))
-    return false;
-  if (__isset.logicalType != rhs.__isset.logicalType)
-    return false;
-  else if (__isset.logicalType && !(logicalType == rhs.logicalType))
-    return false;
-  return true;
-}
-
 SchemaElement::SchemaElement(const SchemaElement& other57) {
   type = other57.type;
   type_length = other57.type_length;
@@ -3721,23 +3445,6 @@ void swap(DataPageHeader &a, DataPageHeader &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool DataPageHeader::operator==(const DataPageHeader & rhs) const
-{
-  if (!(num_values == rhs.num_values))
-    return false;
-  if (!(encoding == rhs.encoding))
-    return false;
-  if (!(definition_level_encoding == rhs.definition_level_encoding))
-    return false;
-  if (!(repetition_level_encoding == rhs.repetition_level_encoding))
-    return false;
-  if (__isset.statistics != rhs.__isset.statistics)
-    return false;
-  else if (__isset.statistics && !(statistics == rhs.statistics))
-    return false;
-  return true;
-}
-
 DataPageHeader::DataPageHeader(const DataPageHeader& other62) {
   num_values = other62.num_values;
   encoding = other62.encoding;
@@ -3821,11 +3528,6 @@ void swap(IndexPageHeader &a, IndexPageHeader &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool IndexPageHeader::operator==(const IndexPageHeader & /* rhs */) const
-{
-  return true;
 }
 
 IndexPageHeader::IndexPageHeader(const IndexPageHeader& other64) noexcept {
@@ -3964,19 +3666,6 @@ void swap(DictionaryPageHeader &a, DictionaryPageHeader &b) {
   swap(a.encoding, b.encoding);
   swap(a.is_sorted, b.is_sorted);
   swap(a.__isset, b.__isset);
-}
-
-bool DictionaryPageHeader::operator==(const DictionaryPageHeader & rhs) const
-{
-  if (!(num_values == rhs.num_values))
-    return false;
-  if (!(encoding == rhs.encoding))
-    return false;
-  if (__isset.is_sorted != rhs.__isset.is_sorted)
-    return false;
-  else if (__isset.is_sorted && !(is_sorted == rhs.is_sorted))
-    return false;
-  return true;
 }
 
 DictionaryPageHeader::DictionaryPageHeader(const DictionaryPageHeader& other67) noexcept {
@@ -4229,31 +3918,6 @@ void swap(DataPageHeaderV2 &a, DataPageHeaderV2 &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool DataPageHeaderV2::operator==(const DataPageHeaderV2 & rhs) const
-{
-  if (!(num_values == rhs.num_values))
-    return false;
-  if (!(num_nulls == rhs.num_nulls))
-    return false;
-  if (!(num_rows == rhs.num_rows))
-    return false;
-  if (!(encoding == rhs.encoding))
-    return false;
-  if (!(definition_levels_byte_length == rhs.definition_levels_byte_length))
-    return false;
-  if (!(repetition_levels_byte_length == rhs.repetition_levels_byte_length))
-    return false;
-  if (__isset.is_compressed != rhs.__isset.is_compressed)
-    return false;
-  else if (__isset.is_compressed && !(is_compressed == rhs.is_compressed))
-    return false;
-  if (__isset.statistics != rhs.__isset.statistics)
-    return false;
-  else if (__isset.statistics && !(statistics == rhs.statistics))
-    return false;
-  return true;
-}
-
 DataPageHeaderV2::DataPageHeaderV2(const DataPageHeaderV2& other70) {
   num_values = other70.num_values;
   num_nulls = other70.num_nulls;
@@ -4346,11 +4010,6 @@ void swap(SplitBlockAlgorithm &a, SplitBlockAlgorithm &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool SplitBlockAlgorithm::operator==(const SplitBlockAlgorithm & /* rhs */) const
-{
-  return true;
 }
 
 SplitBlockAlgorithm::SplitBlockAlgorithm(const SplitBlockAlgorithm& other72) noexcept {
@@ -4446,15 +4105,6 @@ void swap(BloomFilterAlgorithm &a, BloomFilterAlgorithm &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool BloomFilterAlgorithm::operator==(const BloomFilterAlgorithm & rhs) const
-{
-  if (__isset.BLOCK != rhs.__isset.BLOCK)
-    return false;
-  else if (__isset.BLOCK && !(BLOCK == rhs.BLOCK))
-    return false;
-  return true;
-}
-
 BloomFilterAlgorithm::BloomFilterAlgorithm(const BloomFilterAlgorithm& other74) noexcept {
   BLOCK = other74.BLOCK;
   __isset = other74.__isset;
@@ -4526,11 +4176,6 @@ void swap(XxHash &a, XxHash &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool XxHash::operator==(const XxHash & /* rhs */) const
-{
-  return true;
 }
 
 XxHash::XxHash(const XxHash& other76) noexcept {
@@ -4626,15 +4271,6 @@ void swap(BloomFilterHash &a, BloomFilterHash &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool BloomFilterHash::operator==(const BloomFilterHash & rhs) const
-{
-  if (__isset.XXHASH != rhs.__isset.XXHASH)
-    return false;
-  else if (__isset.XXHASH && !(XXHASH == rhs.XXHASH))
-    return false;
-  return true;
-}
-
 BloomFilterHash::BloomFilterHash(const BloomFilterHash& other78) noexcept {
   XXHASH = other78.XXHASH;
   __isset = other78.__isset;
@@ -4706,11 +4342,6 @@ void swap(Uncompressed &a, Uncompressed &b) {
   using ::std::swap;
   (void) a;
   (void) b;
-}
-
-bool Uncompressed::operator==(const Uncompressed & /* rhs */) const
-{
-  return true;
 }
 
 Uncompressed::Uncompressed(const Uncompressed& other80) noexcept {
@@ -4804,15 +4435,6 @@ void swap(BloomFilterCompression &a, BloomFilterCompression &b) {
   using ::std::swap;
   swap(a.UNCOMPRESSED, b.UNCOMPRESSED);
   swap(a.__isset, b.__isset);
-}
-
-bool BloomFilterCompression::operator==(const BloomFilterCompression & rhs) const
-{
-  if (__isset.UNCOMPRESSED != rhs.__isset.UNCOMPRESSED)
-    return false;
-  else if (__isset.UNCOMPRESSED && !(UNCOMPRESSED == rhs.UNCOMPRESSED))
-    return false;
-  return true;
 }
 
 BloomFilterCompression::BloomFilterCompression(const BloomFilterCompression& other82) noexcept {
@@ -4970,19 +4592,6 @@ void swap(BloomFilterHeader &a, BloomFilterHeader &b) {
   swap(a.algorithm, b.algorithm);
   swap(a.hash, b.hash);
   swap(a.compression, b.compression);
-}
-
-bool BloomFilterHeader::operator==(const BloomFilterHeader & rhs) const
-{
-  if (!(numBytes == rhs.numBytes))
-    return false;
-  if (!(algorithm == rhs.algorithm))
-    return false;
-  if (!(hash == rhs.hash))
-    return false;
-  if (!(compression == rhs.compression))
-    return false;
-  return true;
 }
 
 BloomFilterHeader::BloomFilterHeader(const BloomFilterHeader& other84) noexcept {
@@ -5230,37 +4839,6 @@ void swap(PageHeader &a, PageHeader &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool PageHeader::operator==(const PageHeader & rhs) const
-{
-  if (!(type == rhs.type))
-    return false;
-  if (!(uncompressed_page_size == rhs.uncompressed_page_size))
-    return false;
-  if (!(compressed_page_size == rhs.compressed_page_size))
-    return false;
-  if (__isset.crc != rhs.__isset.crc)
-    return false;
-  else if (__isset.crc && !(crc == rhs.crc))
-    return false;
-  if (__isset.data_page_header != rhs.__isset.data_page_header)
-    return false;
-  else if (__isset.data_page_header && !(data_page_header == rhs.data_page_header))
-    return false;
-  if (__isset.index_page_header != rhs.__isset.index_page_header)
-    return false;
-  else if (__isset.index_page_header && !(index_page_header == rhs.index_page_header))
-    return false;
-  if (__isset.dictionary_page_header != rhs.__isset.dictionary_page_header)
-    return false;
-  else if (__isset.dictionary_page_header && !(dictionary_page_header == rhs.dictionary_page_header))
-    return false;
-  if (__isset.data_page_header_v2 != rhs.__isset.data_page_header_v2)
-    return false;
-  else if (__isset.data_page_header_v2 && !(data_page_header_v2 == rhs.data_page_header_v2))
-    return false;
-  return true;
-}
-
 PageHeader::PageHeader(const PageHeader& other87) {
   type = other87.type;
   uncompressed_page_size = other87.uncompressed_page_size;
@@ -5398,17 +4976,6 @@ void swap(KeyValue &a, KeyValue &b) {
   swap(a.key, b.key);
   swap(a.value, b.value);
   swap(a.__isset, b.__isset);
-}
-
-bool KeyValue::operator==(const KeyValue & rhs) const
-{
-  if (!(key == rhs.key))
-    return false;
-  if (__isset.value != rhs.__isset.value)
-    return false;
-  else if (__isset.value && !(value == rhs.value))
-    return false;
-  return true;
 }
 
 KeyValue::KeyValue(const KeyValue& other89) {
@@ -5551,17 +5118,6 @@ void swap(SortingColumn &a, SortingColumn &b) {
   swap(a.column_idx, b.column_idx);
   swap(a.descending, b.descending);
   swap(a.nulls_first, b.nulls_first);
-}
-
-bool SortingColumn::operator==(const SortingColumn & rhs) const
-{
-  if (!(column_idx == rhs.column_idx))
-    return false;
-  if (!(descending == rhs.descending))
-    return false;
-  if (!(nulls_first == rhs.nulls_first))
-    return false;
-  return true;
 }
 
 SortingColumn::SortingColumn(const SortingColumn& other91) noexcept {
@@ -5711,17 +5267,6 @@ void swap(PageEncodingStats &a, PageEncodingStats &b) {
   swap(a.count, b.count);
 }
 
-bool PageEncodingStats::operator==(const PageEncodingStats & rhs) const
-{
-  if (!(page_type == rhs.page_type))
-    return false;
-  if (!(encoding == rhs.encoding))
-    return false;
-  if (!(count == rhs.count))
-    return false;
-  return true;
-}
-
 PageEncodingStats::PageEncodingStats(const PageEncodingStats& other95) noexcept {
   page_type = other95.page_type;
   encoding = other95.encoding;
@@ -5763,11 +5308,11 @@ void ColumnMetaData::__set_type(const Type::type val) {
   this->type = val;
 }
 
-void ColumnMetaData::__set_encodings(const std::vector<Encoding::type> & val) {
+void ColumnMetaData::__set_encodings(const duckdb::vector<Encoding::type> & val) {
   this->encodings = val;
 }
 
-void ColumnMetaData::__set_path_in_schema(const std::vector<std::string> & val) {
+void ColumnMetaData::__set_path_in_schema(const duckdb::vector<std::string> & val) {
   this->path_in_schema = val;
 }
 
@@ -5787,7 +5332,7 @@ void ColumnMetaData::__set_total_compressed_size(const int64_t val) {
   this->total_compressed_size = val;
 }
 
-void ColumnMetaData::__set_key_value_metadata(const std::vector<KeyValue> & val) {
+void ColumnMetaData::__set_key_value_metadata(const duckdb::vector<KeyValue> & val) {
   this->key_value_metadata = val;
 __isset.key_value_metadata = true;
 }
@@ -5811,7 +5356,7 @@ void ColumnMetaData::__set_statistics(const Statistics& val) {
 __isset.statistics = true;
 }
 
-void ColumnMetaData::__set_encoding_stats(const std::vector<PageEncodingStats> & val) {
+void ColumnMetaData::__set_encoding_stats(const duckdb::vector<PageEncodingStats> & val) {
   this->encoding_stats = val;
 __isset.encoding_stats = true;
 }
@@ -6088,7 +5633,7 @@ uint32_t ColumnMetaData::write(::apache::thrift::protocol::TProtocol* oprot) con
   xfer += oprot->writeFieldBegin("encodings", ::apache::thrift::protocol::T_LIST, 2);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I32, static_cast<uint32_t>(this->encodings.size()));
-    std::vector<Encoding::type> ::const_iterator _iter120;
+    duckdb::vector<Encoding::type> ::const_iterator _iter120;
     for (_iter120 = this->encodings.begin(); _iter120 != this->encodings.end(); ++_iter120)
     {
       xfer += oprot->writeI32(static_cast<int32_t>((*_iter120)));
@@ -6100,7 +5645,7 @@ uint32_t ColumnMetaData::write(::apache::thrift::protocol::TProtocol* oprot) con
   xfer += oprot->writeFieldBegin("path_in_schema", ::apache::thrift::protocol::T_LIST, 3);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->path_in_schema.size()));
-    std::vector<std::string> ::const_iterator _iter121;
+    duckdb::vector<std::string> ::const_iterator _iter121;
     for (_iter121 = this->path_in_schema.begin(); _iter121 != this->path_in_schema.end(); ++_iter121)
     {
       xfer += oprot->writeString((*_iter121));
@@ -6129,7 +5674,7 @@ uint32_t ColumnMetaData::write(::apache::thrift::protocol::TProtocol* oprot) con
     xfer += oprot->writeFieldBegin("key_value_metadata", ::apache::thrift::protocol::T_LIST, 8);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->key_value_metadata.size()));
-      std::vector<KeyValue> ::const_iterator _iter122;
+      duckdb::vector<KeyValue> ::const_iterator _iter122;
       for (_iter122 = this->key_value_metadata.begin(); _iter122 != this->key_value_metadata.end(); ++_iter122)
       {
         xfer += (*_iter122).write(oprot);
@@ -6161,7 +5706,7 @@ uint32_t ColumnMetaData::write(::apache::thrift::protocol::TProtocol* oprot) con
     xfer += oprot->writeFieldBegin("encoding_stats", ::apache::thrift::protocol::T_LIST, 13);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->encoding_stats.size()));
-      std::vector<PageEncodingStats> ::const_iterator _iter123;
+      duckdb::vector<PageEncodingStats> ::const_iterator _iter123;
       for (_iter123 = this->encoding_stats.begin(); _iter123 != this->encoding_stats.end(); ++_iter123)
       {
         xfer += (*_iter123).write(oprot);
@@ -6209,59 +5754,6 @@ void swap(ColumnMetaData &a, ColumnMetaData &b) {
   swap(a.bloom_filter_length, b.bloom_filter_length);
   swap(a.size_statistics, b.size_statistics);
   swap(a.__isset, b.__isset);
-}
-
-bool ColumnMetaData::operator==(const ColumnMetaData & rhs) const
-{
-  if (!(type == rhs.type))
-    return false;
-  if (!(encodings == rhs.encodings))
-    return false;
-  if (!(path_in_schema == rhs.path_in_schema))
-    return false;
-  if (!(codec == rhs.codec))
-    return false;
-  if (!(num_values == rhs.num_values))
-    return false;
-  if (!(total_uncompressed_size == rhs.total_uncompressed_size))
-    return false;
-  if (!(total_compressed_size == rhs.total_compressed_size))
-    return false;
-  if (__isset.key_value_metadata != rhs.__isset.key_value_metadata)
-    return false;
-  else if (__isset.key_value_metadata && !(key_value_metadata == rhs.key_value_metadata))
-    return false;
-  if (!(data_page_offset == rhs.data_page_offset))
-    return false;
-  if (__isset.index_page_offset != rhs.__isset.index_page_offset)
-    return false;
-  else if (__isset.index_page_offset && !(index_page_offset == rhs.index_page_offset))
-    return false;
-  if (__isset.dictionary_page_offset != rhs.__isset.dictionary_page_offset)
-    return false;
-  else if (__isset.dictionary_page_offset && !(dictionary_page_offset == rhs.dictionary_page_offset))
-    return false;
-  if (__isset.statistics != rhs.__isset.statistics)
-    return false;
-  else if (__isset.statistics && !(statistics == rhs.statistics))
-    return false;
-  if (__isset.encoding_stats != rhs.__isset.encoding_stats)
-    return false;
-  else if (__isset.encoding_stats && !(encoding_stats == rhs.encoding_stats))
-    return false;
-  if (__isset.bloom_filter_offset != rhs.__isset.bloom_filter_offset)
-    return false;
-  else if (__isset.bloom_filter_offset && !(bloom_filter_offset == rhs.bloom_filter_offset))
-    return false;
-  if (__isset.bloom_filter_length != rhs.__isset.bloom_filter_length)
-    return false;
-  else if (__isset.bloom_filter_length && !(bloom_filter_length == rhs.bloom_filter_length))
-    return false;
-  if (__isset.size_statistics != rhs.__isset.size_statistics)
-    return false;
-  else if (__isset.size_statistics && !(size_statistics == rhs.size_statistics))
-    return false;
-  return true;
 }
 
 ColumnMetaData::ColumnMetaData(const ColumnMetaData& other124) {
@@ -6382,11 +5874,6 @@ void swap(EncryptionWithFooterKey &a, EncryptionWithFooterKey &b) {
   (void) b;
 }
 
-bool EncryptionWithFooterKey::operator==(const EncryptionWithFooterKey & /* rhs */) const
-{
-  return true;
-}
-
 EncryptionWithFooterKey::EncryptionWithFooterKey(const EncryptionWithFooterKey& other126) noexcept {
   (void) other126;
 }
@@ -6408,7 +5895,7 @@ EncryptionWithColumnKey::EncryptionWithColumnKey() noexcept
    : key_metadata() {
 }
 
-void EncryptionWithColumnKey::__set_path_in_schema(const std::vector<std::string> & val) {
+void EncryptionWithColumnKey::__set_path_in_schema(const duckdb::vector<std::string> & val) {
   this->path_in_schema = val;
 }
 
@@ -6495,7 +5982,7 @@ uint32_t EncryptionWithColumnKey::write(::apache::thrift::protocol::TProtocol* o
   xfer += oprot->writeFieldBegin("path_in_schema", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->path_in_schema.size()));
-    std::vector<std::string> ::const_iterator _iter133;
+    duckdb::vector<std::string> ::const_iterator _iter133;
     for (_iter133 = this->path_in_schema.begin(); _iter133 != this->path_in_schema.end(); ++_iter133)
     {
       xfer += oprot->writeString((*_iter133));
@@ -6519,17 +6006,6 @@ void swap(EncryptionWithColumnKey &a, EncryptionWithColumnKey &b) {
   swap(a.path_in_schema, b.path_in_schema);
   swap(a.key_metadata, b.key_metadata);
   swap(a.__isset, b.__isset);
-}
-
-bool EncryptionWithColumnKey::operator==(const EncryptionWithColumnKey & rhs) const
-{
-  if (!(path_in_schema == rhs.path_in_schema))
-    return false;
-  if (__isset.key_metadata != rhs.__isset.key_metadata)
-    return false;
-  else if (__isset.key_metadata && !(key_metadata == rhs.key_metadata))
-    return false;
-  return true;
 }
 
 EncryptionWithColumnKey::EncryptionWithColumnKey(const EncryptionWithColumnKey& other134) {
@@ -6648,19 +6124,6 @@ void swap(ColumnCryptoMetaData &a, ColumnCryptoMetaData &b) {
   swap(a.ENCRYPTION_WITH_FOOTER_KEY, b.ENCRYPTION_WITH_FOOTER_KEY);
   swap(a.ENCRYPTION_WITH_COLUMN_KEY, b.ENCRYPTION_WITH_COLUMN_KEY);
   swap(a.__isset, b.__isset);
-}
-
-bool ColumnCryptoMetaData::operator==(const ColumnCryptoMetaData & rhs) const
-{
-  if (__isset.ENCRYPTION_WITH_FOOTER_KEY != rhs.__isset.ENCRYPTION_WITH_FOOTER_KEY)
-    return false;
-  else if (__isset.ENCRYPTION_WITH_FOOTER_KEY && !(ENCRYPTION_WITH_FOOTER_KEY == rhs.ENCRYPTION_WITH_FOOTER_KEY))
-    return false;
-  if (__isset.ENCRYPTION_WITH_COLUMN_KEY != rhs.__isset.ENCRYPTION_WITH_COLUMN_KEY)
-    return false;
-  else if (__isset.ENCRYPTION_WITH_COLUMN_KEY && !(ENCRYPTION_WITH_COLUMN_KEY == rhs.ENCRYPTION_WITH_COLUMN_KEY))
-    return false;
-  return true;
 }
 
 ColumnCryptoMetaData::ColumnCryptoMetaData(const ColumnCryptoMetaData& other136) {
@@ -6922,45 +6385,6 @@ void swap(ColumnChunk &a, ColumnChunk &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool ColumnChunk::operator==(const ColumnChunk & rhs) const
-{
-  if (__isset.file_path != rhs.__isset.file_path)
-    return false;
-  else if (__isset.file_path && !(file_path == rhs.file_path))
-    return false;
-  if (!(file_offset == rhs.file_offset))
-    return false;
-  if (__isset.meta_data != rhs.__isset.meta_data)
-    return false;
-  else if (__isset.meta_data && !(meta_data == rhs.meta_data))
-    return false;
-  if (__isset.offset_index_offset != rhs.__isset.offset_index_offset)
-    return false;
-  else if (__isset.offset_index_offset && !(offset_index_offset == rhs.offset_index_offset))
-    return false;
-  if (__isset.offset_index_length != rhs.__isset.offset_index_length)
-    return false;
-  else if (__isset.offset_index_length && !(offset_index_length == rhs.offset_index_length))
-    return false;
-  if (__isset.column_index_offset != rhs.__isset.column_index_offset)
-    return false;
-  else if (__isset.column_index_offset && !(column_index_offset == rhs.column_index_offset))
-    return false;
-  if (__isset.column_index_length != rhs.__isset.column_index_length)
-    return false;
-  else if (__isset.column_index_length && !(column_index_length == rhs.column_index_length))
-    return false;
-  if (__isset.crypto_metadata != rhs.__isset.crypto_metadata)
-    return false;
-  else if (__isset.crypto_metadata && !(crypto_metadata == rhs.crypto_metadata))
-    return false;
-  if (__isset.encrypted_column_metadata != rhs.__isset.encrypted_column_metadata)
-    return false;
-  else if (__isset.encrypted_column_metadata && !(encrypted_column_metadata == rhs.encrypted_column_metadata))
-    return false;
-  return true;
-}
-
 ColumnChunk::ColumnChunk(const ColumnChunk& other138) {
   file_path = other138.file_path;
   file_offset = other138.file_offset;
@@ -7013,7 +6437,7 @@ RowGroup::RowGroup() noexcept
      ordinal(0) {
 }
 
-void RowGroup::__set_columns(const std::vector<ColumnChunk> & val) {
+void RowGroup::__set_columns(const duckdb::vector<ColumnChunk> & val) {
   this->columns = val;
 }
 
@@ -7025,7 +6449,7 @@ void RowGroup::__set_num_rows(const int64_t val) {
   this->num_rows = val;
 }
 
-void RowGroup::__set_sorting_columns(const std::vector<SortingColumn> & val) {
+void RowGroup::__set_sorting_columns(const duckdb::vector<SortingColumn> & val) {
   this->sorting_columns = val;
 __isset.sorting_columns = true;
 }
@@ -7181,7 +6605,7 @@ uint32_t RowGroup::write(::apache::thrift::protocol::TProtocol* oprot) const {
   xfer += oprot->writeFieldBegin("columns", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->columns.size()));
-    std::vector<ColumnChunk> ::const_iterator _iter150;
+    duckdb::vector<ColumnChunk> ::const_iterator _iter150;
     for (_iter150 = this->columns.begin(); _iter150 != this->columns.end(); ++_iter150)
     {
       xfer += (*_iter150).write(oprot);
@@ -7202,7 +6626,7 @@ uint32_t RowGroup::write(::apache::thrift::protocol::TProtocol* oprot) const {
     xfer += oprot->writeFieldBegin("sorting_columns", ::apache::thrift::protocol::T_LIST, 4);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->sorting_columns.size()));
-      std::vector<SortingColumn> ::const_iterator _iter151;
+      duckdb::vector<SortingColumn> ::const_iterator _iter151;
       for (_iter151 = this->sorting_columns.begin(); _iter151 != this->sorting_columns.end(); ++_iter151)
       {
         xfer += (*_iter151).write(oprot);
@@ -7241,33 +6665,6 @@ void swap(RowGroup &a, RowGroup &b) {
   swap(a.total_compressed_size, b.total_compressed_size);
   swap(a.ordinal, b.ordinal);
   swap(a.__isset, b.__isset);
-}
-
-bool RowGroup::operator==(const RowGroup & rhs) const
-{
-  if (!(columns == rhs.columns))
-    return false;
-  if (!(total_byte_size == rhs.total_byte_size))
-    return false;
-  if (!(num_rows == rhs.num_rows))
-    return false;
-  if (__isset.sorting_columns != rhs.__isset.sorting_columns)
-    return false;
-  else if (__isset.sorting_columns && !(sorting_columns == rhs.sorting_columns))
-    return false;
-  if (__isset.file_offset != rhs.__isset.file_offset)
-    return false;
-  else if (__isset.file_offset && !(file_offset == rhs.file_offset))
-    return false;
-  if (__isset.total_compressed_size != rhs.__isset.total_compressed_size)
-    return false;
-  else if (__isset.total_compressed_size && !(total_compressed_size == rhs.total_compressed_size))
-    return false;
-  if (__isset.ordinal != rhs.__isset.ordinal)
-    return false;
-  else if (__isset.ordinal && !(ordinal == rhs.ordinal))
-    return false;
-  return true;
 }
 
 RowGroup::RowGroup(const RowGroup& other152) {
@@ -7361,11 +6758,6 @@ void swap(TypeDefinedOrder &a, TypeDefinedOrder &b) {
   (void) b;
 }
 
-bool TypeDefinedOrder::operator==(const TypeDefinedOrder & /* rhs */) const
-{
-  return true;
-}
-
 TypeDefinedOrder::TypeDefinedOrder(const TypeDefinedOrder& other154) noexcept {
   (void) other154;
 }
@@ -7457,15 +6849,6 @@ void swap(ColumnOrder &a, ColumnOrder &b) {
   using ::std::swap;
   swap(a.TYPE_ORDER, b.TYPE_ORDER);
   swap(a.__isset, b.__isset);
-}
-
-bool ColumnOrder::operator==(const ColumnOrder & rhs) const
-{
-  if (__isset.TYPE_ORDER != rhs.__isset.TYPE_ORDER)
-    return false;
-  else if (__isset.TYPE_ORDER && !(TYPE_ORDER == rhs.TYPE_ORDER))
-    return false;
-  return true;
 }
 
 ColumnOrder::ColumnOrder(const ColumnOrder& other156) noexcept {
@@ -7607,17 +6990,6 @@ void swap(PageLocation &a, PageLocation &b) {
   swap(a.first_row_index, b.first_row_index);
 }
 
-bool PageLocation::operator==(const PageLocation & rhs) const
-{
-  if (!(offset == rhs.offset))
-    return false;
-  if (!(compressed_page_size == rhs.compressed_page_size))
-    return false;
-  if (!(first_row_index == rhs.first_row_index))
-    return false;
-  return true;
-}
-
 PageLocation::PageLocation(const PageLocation& other158) noexcept {
   offset = other158.offset;
   compressed_page_size = other158.compressed_page_size;
@@ -7645,11 +7017,11 @@ OffsetIndex::~OffsetIndex() noexcept {
 OffsetIndex::OffsetIndex() noexcept {
 }
 
-void OffsetIndex::__set_page_locations(const std::vector<PageLocation> & val) {
+void OffsetIndex::__set_page_locations(const duckdb::vector<PageLocation> & val) {
   this->page_locations = val;
 }
 
-void OffsetIndex::__set_unencoded_byte_array_data_bytes(const std::vector<int64_t> & val) {
+void OffsetIndex::__set_unencoded_byte_array_data_bytes(const duckdb::vector<int64_t> & val) {
   this->unencoded_byte_array_data_bytes = val;
 __isset.unencoded_byte_array_data_bytes = true;
 }
@@ -7744,7 +7116,7 @@ uint32_t OffsetIndex::write(::apache::thrift::protocol::TProtocol* oprot) const 
   xfer += oprot->writeFieldBegin("page_locations", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->page_locations.size()));
-    std::vector<PageLocation> ::const_iterator _iter170;
+    duckdb::vector<PageLocation> ::const_iterator _iter170;
     for (_iter170 = this->page_locations.begin(); _iter170 != this->page_locations.end(); ++_iter170)
     {
       xfer += (*_iter170).write(oprot);
@@ -7757,7 +7129,7 @@ uint32_t OffsetIndex::write(::apache::thrift::protocol::TProtocol* oprot) const 
     xfer += oprot->writeFieldBegin("unencoded_byte_array_data_bytes", ::apache::thrift::protocol::T_LIST, 2);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I64, static_cast<uint32_t>(this->unencoded_byte_array_data_bytes.size()));
-      std::vector<int64_t> ::const_iterator _iter171;
+      duckdb::vector<int64_t> ::const_iterator _iter171;
       for (_iter171 = this->unencoded_byte_array_data_bytes.begin(); _iter171 != this->unencoded_byte_array_data_bytes.end(); ++_iter171)
       {
         xfer += oprot->writeI64((*_iter171));
@@ -7776,17 +7148,6 @@ void swap(OffsetIndex &a, OffsetIndex &b) {
   swap(a.page_locations, b.page_locations);
   swap(a.unencoded_byte_array_data_bytes, b.unencoded_byte_array_data_bytes);
   swap(a.__isset, b.__isset);
-}
-
-bool OffsetIndex::operator==(const OffsetIndex & rhs) const
-{
-  if (!(page_locations == rhs.page_locations))
-    return false;
-  if (__isset.unencoded_byte_array_data_bytes != rhs.__isset.unencoded_byte_array_data_bytes)
-    return false;
-  else if (__isset.unencoded_byte_array_data_bytes && !(unencoded_byte_array_data_bytes == rhs.unencoded_byte_array_data_bytes))
-    return false;
-  return true;
 }
 
 OffsetIndex::OffsetIndex(const OffsetIndex& other172) {
@@ -7816,15 +7177,15 @@ ColumnIndex::ColumnIndex() noexcept
    : boundary_order(static_cast<BoundaryOrder::type>(0)) {
 }
 
-void ColumnIndex::__set_null_pages(const std::vector<bool> & val) {
+void ColumnIndex::__set_null_pages(const duckdb::vector<bool> & val) {
   this->null_pages = val;
 }
 
-void ColumnIndex::__set_min_values(const std::vector<std::string> & val) {
+void ColumnIndex::__set_min_values(const duckdb::vector<std::string> & val) {
   this->min_values = val;
 }
 
-void ColumnIndex::__set_max_values(const std::vector<std::string> & val) {
+void ColumnIndex::__set_max_values(const duckdb::vector<std::string> & val) {
   this->max_values = val;
 }
 
@@ -7832,17 +7193,17 @@ void ColumnIndex::__set_boundary_order(const BoundaryOrder::type val) {
   this->boundary_order = val;
 }
 
-void ColumnIndex::__set_null_counts(const std::vector<int64_t> & val) {
+void ColumnIndex::__set_null_counts(const duckdb::vector<int64_t> & val) {
   this->null_counts = val;
 __isset.null_counts = true;
 }
 
-void ColumnIndex::__set_repetition_level_histograms(const std::vector<int64_t> & val) {
+void ColumnIndex::__set_repetition_level_histograms(const duckdb::vector<int64_t> & val) {
   this->repetition_level_histograms = val;
 __isset.repetition_level_histograms = true;
 }
 
-void ColumnIndex::__set_definition_level_histograms(const std::vector<int64_t> & val) {
+void ColumnIndex::__set_definition_level_histograms(const duckdb::vector<int64_t> & val) {
   this->definition_level_histograms = val;
 __isset.definition_level_histograms = true;
 }
@@ -8036,7 +7397,7 @@ uint32_t ColumnIndex::write(::apache::thrift::protocol::TProtocol* oprot) const 
   xfer += oprot->writeFieldBegin("null_pages", ::apache::thrift::protocol::T_LIST, 1);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_BOOL, static_cast<uint32_t>(this->null_pages.size()));
-    std::vector<bool> ::const_iterator _iter205;
+    duckdb::vector<bool> ::const_iterator _iter205;
     for (_iter205 = this->null_pages.begin(); _iter205 != this->null_pages.end(); ++_iter205)
     {
       xfer += oprot->writeBool((*_iter205));
@@ -8048,7 +7409,7 @@ uint32_t ColumnIndex::write(::apache::thrift::protocol::TProtocol* oprot) const 
   xfer += oprot->writeFieldBegin("min_values", ::apache::thrift::protocol::T_LIST, 2);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->min_values.size()));
-    std::vector<std::string> ::const_iterator _iter206;
+    duckdb::vector<std::string> ::const_iterator _iter206;
     for (_iter206 = this->min_values.begin(); _iter206 != this->min_values.end(); ++_iter206)
     {
       xfer += oprot->writeBinary((*_iter206));
@@ -8060,7 +7421,7 @@ uint32_t ColumnIndex::write(::apache::thrift::protocol::TProtocol* oprot) const 
   xfer += oprot->writeFieldBegin("max_values", ::apache::thrift::protocol::T_LIST, 3);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRING, static_cast<uint32_t>(this->max_values.size()));
-    std::vector<std::string> ::const_iterator _iter207;
+    duckdb::vector<std::string> ::const_iterator _iter207;
     for (_iter207 = this->max_values.begin(); _iter207 != this->max_values.end(); ++_iter207)
     {
       xfer += oprot->writeBinary((*_iter207));
@@ -8077,7 +7438,7 @@ uint32_t ColumnIndex::write(::apache::thrift::protocol::TProtocol* oprot) const 
     xfer += oprot->writeFieldBegin("null_counts", ::apache::thrift::protocol::T_LIST, 5);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I64, static_cast<uint32_t>(this->null_counts.size()));
-      std::vector<int64_t> ::const_iterator _iter208;
+      duckdb::vector<int64_t> ::const_iterator _iter208;
       for (_iter208 = this->null_counts.begin(); _iter208 != this->null_counts.end(); ++_iter208)
       {
         xfer += oprot->writeI64((*_iter208));
@@ -8090,7 +7451,7 @@ uint32_t ColumnIndex::write(::apache::thrift::protocol::TProtocol* oprot) const 
     xfer += oprot->writeFieldBegin("repetition_level_histograms", ::apache::thrift::protocol::T_LIST, 6);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I64, static_cast<uint32_t>(this->repetition_level_histograms.size()));
-      std::vector<int64_t> ::const_iterator _iter209;
+      duckdb::vector<int64_t> ::const_iterator _iter209;
       for (_iter209 = this->repetition_level_histograms.begin(); _iter209 != this->repetition_level_histograms.end(); ++_iter209)
       {
         xfer += oprot->writeI64((*_iter209));
@@ -8103,7 +7464,7 @@ uint32_t ColumnIndex::write(::apache::thrift::protocol::TProtocol* oprot) const 
     xfer += oprot->writeFieldBegin("definition_level_histograms", ::apache::thrift::protocol::T_LIST, 7);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_I64, static_cast<uint32_t>(this->definition_level_histograms.size()));
-      std::vector<int64_t> ::const_iterator _iter210;
+      duckdb::vector<int64_t> ::const_iterator _iter210;
       for (_iter210 = this->definition_level_histograms.begin(); _iter210 != this->definition_level_histograms.end(); ++_iter210)
       {
         xfer += oprot->writeI64((*_iter210));
@@ -8127,31 +7488,6 @@ void swap(ColumnIndex &a, ColumnIndex &b) {
   swap(a.repetition_level_histograms, b.repetition_level_histograms);
   swap(a.definition_level_histograms, b.definition_level_histograms);
   swap(a.__isset, b.__isset);
-}
-
-bool ColumnIndex::operator==(const ColumnIndex & rhs) const
-{
-  if (!(null_pages == rhs.null_pages))
-    return false;
-  if (!(min_values == rhs.min_values))
-    return false;
-  if (!(max_values == rhs.max_values))
-    return false;
-  if (!(boundary_order == rhs.boundary_order))
-    return false;
-  if (__isset.null_counts != rhs.__isset.null_counts)
-    return false;
-  else if (__isset.null_counts && !(null_counts == rhs.null_counts))
-    return false;
-  if (__isset.repetition_level_histograms != rhs.__isset.repetition_level_histograms)
-    return false;
-  else if (__isset.repetition_level_histograms && !(repetition_level_histograms == rhs.repetition_level_histograms))
-    return false;
-  if (__isset.definition_level_histograms != rhs.__isset.definition_level_histograms)
-    return false;
-  else if (__isset.definition_level_histograms && !(definition_level_histograms == rhs.definition_level_histograms))
-    return false;
-  return true;
 }
 
 ColumnIndex::ColumnIndex(const ColumnIndex& other211) {
@@ -8309,23 +7645,6 @@ void swap(AesGcmV1 &a, AesGcmV1 &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool AesGcmV1::operator==(const AesGcmV1 & rhs) const
-{
-  if (__isset.aad_prefix != rhs.__isset.aad_prefix)
-    return false;
-  else if (__isset.aad_prefix && !(aad_prefix == rhs.aad_prefix))
-    return false;
-  if (__isset.aad_file_unique != rhs.__isset.aad_file_unique)
-    return false;
-  else if (__isset.aad_file_unique && !(aad_file_unique == rhs.aad_file_unique))
-    return false;
-  if (__isset.supply_aad_prefix != rhs.__isset.supply_aad_prefix)
-    return false;
-  else if (__isset.supply_aad_prefix && !(supply_aad_prefix == rhs.supply_aad_prefix))
-    return false;
-  return true;
-}
-
 AesGcmV1::AesGcmV1(const AesGcmV1& other213) {
   aad_prefix = other213.aad_prefix;
   aad_file_unique = other213.aad_file_unique;
@@ -8469,23 +7788,6 @@ void swap(AesGcmCtrV1 &a, AesGcmCtrV1 &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool AesGcmCtrV1::operator==(const AesGcmCtrV1 & rhs) const
-{
-  if (__isset.aad_prefix != rhs.__isset.aad_prefix)
-    return false;
-  else if (__isset.aad_prefix && !(aad_prefix == rhs.aad_prefix))
-    return false;
-  if (__isset.aad_file_unique != rhs.__isset.aad_file_unique)
-    return false;
-  else if (__isset.aad_file_unique && !(aad_file_unique == rhs.aad_file_unique))
-    return false;
-  if (__isset.supply_aad_prefix != rhs.__isset.supply_aad_prefix)
-    return false;
-  else if (__isset.supply_aad_prefix && !(supply_aad_prefix == rhs.supply_aad_prefix))
-    return false;
-  return true;
-}
-
 AesGcmCtrV1::AesGcmCtrV1(const AesGcmCtrV1& other215) {
   aad_prefix = other215.aad_prefix;
   aad_file_unique = other215.aad_file_unique;
@@ -8607,19 +7909,6 @@ void swap(EncryptionAlgorithm &a, EncryptionAlgorithm &b) {
   swap(a.__isset, b.__isset);
 }
 
-bool EncryptionAlgorithm::operator==(const EncryptionAlgorithm & rhs) const
-{
-  if (__isset.AES_GCM_V1 != rhs.__isset.AES_GCM_V1)
-    return false;
-  else if (__isset.AES_GCM_V1 && !(AES_GCM_V1 == rhs.AES_GCM_V1))
-    return false;
-  if (__isset.AES_GCM_CTR_V1 != rhs.__isset.AES_GCM_CTR_V1)
-    return false;
-  else if (__isset.AES_GCM_CTR_V1 && !(AES_GCM_CTR_V1 == rhs.AES_GCM_CTR_V1))
-    return false;
-  return true;
-}
-
 EncryptionAlgorithm::EncryptionAlgorithm(const EncryptionAlgorithm& other217) {
   AES_GCM_V1 = other217.AES_GCM_V1;
   AES_GCM_CTR_V1 = other217.AES_GCM_CTR_V1;
@@ -8654,7 +7943,7 @@ void FileMetaData::__set_version(const int32_t val) {
   this->version = val;
 }
 
-void FileMetaData::__set_schema(const std::vector<SchemaElement> & val) {
+void FileMetaData::__set_schema(const duckdb::vector<SchemaElement> & val) {
   this->schema = val;
 }
 
@@ -8662,11 +7951,11 @@ void FileMetaData::__set_num_rows(const int64_t val) {
   this->num_rows = val;
 }
 
-void FileMetaData::__set_row_groups(const std::vector<RowGroup> & val) {
+void FileMetaData::__set_row_groups(const duckdb::vector<RowGroup> & val) {
   this->row_groups = val;
 }
 
-void FileMetaData::__set_key_value_metadata(const std::vector<KeyValue> & val) {
+void FileMetaData::__set_key_value_metadata(const duckdb::vector<KeyValue> & val) {
   this->key_value_metadata = val;
 __isset.key_value_metadata = true;
 }
@@ -8676,7 +7965,7 @@ void FileMetaData::__set_created_by(const std::string& val) {
 __isset.created_by = true;
 }
 
-void FileMetaData::__set_column_orders(const std::vector<ColumnOrder> & val) {
+void FileMetaData::__set_column_orders(const duckdb::vector<ColumnOrder> & val) {
   this->column_orders = val;
 __isset.column_orders = true;
 }
@@ -8874,7 +8163,7 @@ uint32_t FileMetaData::write(::apache::thrift::protocol::TProtocol* oprot) const
   xfer += oprot->writeFieldBegin("schema", ::apache::thrift::protocol::T_LIST, 2);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->schema.size()));
-    std::vector<SchemaElement> ::const_iterator _iter239;
+    duckdb::vector<SchemaElement> ::const_iterator _iter239;
     for (_iter239 = this->schema.begin(); _iter239 != this->schema.end(); ++_iter239)
     {
       xfer += (*_iter239).write(oprot);
@@ -8890,7 +8179,7 @@ uint32_t FileMetaData::write(::apache::thrift::protocol::TProtocol* oprot) const
   xfer += oprot->writeFieldBegin("row_groups", ::apache::thrift::protocol::T_LIST, 4);
   {
     xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->row_groups.size()));
-    std::vector<RowGroup> ::const_iterator _iter240;
+    duckdb::vector<RowGroup> ::const_iterator _iter240;
     for (_iter240 = this->row_groups.begin(); _iter240 != this->row_groups.end(); ++_iter240)
     {
       xfer += (*_iter240).write(oprot);
@@ -8903,7 +8192,7 @@ uint32_t FileMetaData::write(::apache::thrift::protocol::TProtocol* oprot) const
     xfer += oprot->writeFieldBegin("key_value_metadata", ::apache::thrift::protocol::T_LIST, 5);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->key_value_metadata.size()));
-      std::vector<KeyValue> ::const_iterator _iter241;
+      duckdb::vector<KeyValue> ::const_iterator _iter241;
       for (_iter241 = this->key_value_metadata.begin(); _iter241 != this->key_value_metadata.end(); ++_iter241)
       {
         xfer += (*_iter241).write(oprot);
@@ -8921,7 +8210,7 @@ uint32_t FileMetaData::write(::apache::thrift::protocol::TProtocol* oprot) const
     xfer += oprot->writeFieldBegin("column_orders", ::apache::thrift::protocol::T_LIST, 7);
     {
       xfer += oprot->writeListBegin(::apache::thrift::protocol::T_STRUCT, static_cast<uint32_t>(this->column_orders.size()));
-      std::vector<ColumnOrder> ::const_iterator _iter242;
+      duckdb::vector<ColumnOrder> ::const_iterator _iter242;
       for (_iter242 = this->column_orders.begin(); _iter242 != this->column_orders.end(); ++_iter242)
       {
         xfer += (*_iter242).write(oprot);
@@ -8957,39 +8246,6 @@ void swap(FileMetaData &a, FileMetaData &b) {
   swap(a.encryption_algorithm, b.encryption_algorithm);
   swap(a.footer_signing_key_metadata, b.footer_signing_key_metadata);
   swap(a.__isset, b.__isset);
-}
-
-bool FileMetaData::operator==(const FileMetaData & rhs) const
-{
-  if (!(version == rhs.version))
-    return false;
-  if (!(schema == rhs.schema))
-    return false;
-  if (!(num_rows == rhs.num_rows))
-    return false;
-  if (!(row_groups == rhs.row_groups))
-    return false;
-  if (__isset.key_value_metadata != rhs.__isset.key_value_metadata)
-    return false;
-  else if (__isset.key_value_metadata && !(key_value_metadata == rhs.key_value_metadata))
-    return false;
-  if (__isset.created_by != rhs.__isset.created_by)
-    return false;
-  else if (__isset.created_by && !(created_by == rhs.created_by))
-    return false;
-  if (__isset.column_orders != rhs.__isset.column_orders)
-    return false;
-  else if (__isset.column_orders && !(column_orders == rhs.column_orders))
-    return false;
-  if (__isset.encryption_algorithm != rhs.__isset.encryption_algorithm)
-    return false;
-  else if (__isset.encryption_algorithm && !(encryption_algorithm == rhs.encryption_algorithm))
-    return false;
-  if (__isset.footer_signing_key_metadata != rhs.__isset.footer_signing_key_metadata)
-    return false;
-  else if (__isset.footer_signing_key_metadata && !(footer_signing_key_metadata == rhs.footer_signing_key_metadata))
-    return false;
-  return true;
 }
 
 FileMetaData::FileMetaData(const FileMetaData& other243) {
@@ -9131,17 +8387,6 @@ void swap(FileCryptoMetaData &a, FileCryptoMetaData &b) {
   swap(a.encryption_algorithm, b.encryption_algorithm);
   swap(a.key_metadata, b.key_metadata);
   swap(a.__isset, b.__isset);
-}
-
-bool FileCryptoMetaData::operator==(const FileCryptoMetaData & rhs) const
-{
-  if (!(encryption_algorithm == rhs.encryption_algorithm))
-    return false;
-  if (__isset.key_metadata != rhs.__isset.key_metadata)
-    return false;
-  else if (__isset.key_metadata && !(key_metadata == rhs.key_metadata))
-    return false;
-  return true;
 }
 
 FileCryptoMetaData::FileCryptoMetaData(const FileCryptoMetaData& other245) {

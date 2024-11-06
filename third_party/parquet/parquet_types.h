@@ -19,6 +19,9 @@
 #include <memory>
 
 
+#include "windows_compatibility.h"
+namespace apache = duckdb_apache;
+
 namespace duckdb_parquet {
 
 /**
@@ -504,7 +507,7 @@ class SizeStatistics : public virtual ::apache::thrift::TBase {
    * of information.
    * 
    */
-  std::vector<int64_t>  repetition_level_histogram;
+  duckdb::vector<int64_t>  repetition_level_histogram;
   /**
    * Same as repetition_level_histogram except for definition levels.
    * 
@@ -512,22 +515,15 @@ class SizeStatistics : public virtual ::apache::thrift::TBase {
    * loss of information.
    * 
    */
-  std::vector<int64_t>  definition_level_histogram;
+  duckdb::vector<int64_t>  definition_level_histogram;
 
   _SizeStatistics__isset __isset;
 
   void __set_unencoded_byte_array_data_bytes(const int64_t val);
 
-  void __set_repetition_level_histogram(const std::vector<int64_t> & val);
+  void __set_repetition_level_histogram(const duckdb::vector<int64_t> & val);
 
-  void __set_definition_level_histogram(const std::vector<int64_t> & val);
-
-  bool operator == (const SizeStatistics & rhs) const;
-  bool operator != (const SizeStatistics &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const SizeStatistics & ) const;
+  void __set_definition_level_histogram(const duckdb::vector<int64_t> & val);
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -632,13 +628,6 @@ class Statistics : public virtual ::apache::thrift::TBase {
 
   void __set_is_min_value_exact(const bool val);
 
-  bool operator == (const Statistics & rhs) const;
-  bool operator != (const Statistics &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Statistics & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -662,13 +651,6 @@ class StringType : public virtual ::apache::thrift::TBase {
 
   virtual ~StringType() noexcept;
 
-  bool operator == (const StringType & /* rhs */) const;
-  bool operator != (const StringType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const StringType & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -688,13 +670,6 @@ class UUIDType : public virtual ::apache::thrift::TBase {
   UUIDType() noexcept;
 
   virtual ~UUIDType() noexcept;
-
-  bool operator == (const UUIDType & /* rhs */) const;
-  bool operator != (const UUIDType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const UUIDType & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -716,13 +691,6 @@ class MapType : public virtual ::apache::thrift::TBase {
 
   virtual ~MapType() noexcept;
 
-  bool operator == (const MapType & /* rhs */) const;
-  bool operator != (const MapType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const MapType & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -742,13 +710,6 @@ class ListType : public virtual ::apache::thrift::TBase {
   ListType() noexcept;
 
   virtual ~ListType() noexcept;
-
-  bool operator == (const ListType & /* rhs */) const;
-  bool operator != (const ListType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const ListType & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -770,13 +731,6 @@ class EnumType : public virtual ::apache::thrift::TBase {
 
   virtual ~EnumType() noexcept;
 
-  bool operator == (const EnumType & /* rhs */) const;
-  bool operator != (const EnumType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const EnumType & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -797,13 +751,6 @@ class DateType : public virtual ::apache::thrift::TBase {
 
   virtual ~DateType() noexcept;
 
-  bool operator == (const DateType & /* rhs */) const;
-  bool operator != (const DateType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const DateType & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -823,13 +770,6 @@ class Float16Type : public virtual ::apache::thrift::TBase {
   Float16Type() noexcept;
 
   virtual ~Float16Type() noexcept;
-
-  bool operator == (const Float16Type & /* rhs */) const;
-  bool operator != (const Float16Type &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Float16Type & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -857,13 +797,6 @@ class NullType : public virtual ::apache::thrift::TBase {
   NullType() noexcept;
 
   virtual ~NullType() noexcept;
-
-  bool operator == (const NullType & /* rhs */) const;
-  bool operator != (const NullType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const NullType & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -902,13 +835,6 @@ class DecimalType : public virtual ::apache::thrift::TBase {
 
   void __set_precision(const int32_t val);
 
-  bool operator == (const DecimalType & rhs) const;
-  bool operator != (const DecimalType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const DecimalType & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -932,13 +858,6 @@ class MilliSeconds : public virtual ::apache::thrift::TBase {
 
   virtual ~MilliSeconds() noexcept;
 
-  bool operator == (const MilliSeconds & /* rhs */) const;
-  bool operator != (const MilliSeconds &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const MilliSeconds & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -959,13 +878,6 @@ class MicroSeconds : public virtual ::apache::thrift::TBase {
 
   virtual ~MicroSeconds() noexcept;
 
-  bool operator == (const MicroSeconds & /* rhs */) const;
-  bool operator != (const MicroSeconds &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const MicroSeconds & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -985,13 +897,6 @@ class NanoSeconds : public virtual ::apache::thrift::TBase {
   NanoSeconds() noexcept;
 
   virtual ~NanoSeconds() noexcept;
-
-  bool operator == (const NanoSeconds & /* rhs */) const;
-  bool operator != (const NanoSeconds &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const NanoSeconds & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1030,13 +935,6 @@ class TimeUnit : public virtual ::apache::thrift::TBase {
 
   void __set_NANOS(const NanoSeconds& val);
 
-  bool operator == (const TimeUnit & rhs) const;
-  bool operator != (const TimeUnit &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const TimeUnit & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -1068,13 +966,6 @@ class TimestampType : public virtual ::apache::thrift::TBase {
 
   void __set_unit(const TimeUnit& val);
 
-  bool operator == (const TimestampType & rhs) const;
-  bool operator != (const TimestampType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const TimestampType & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -1105,13 +996,6 @@ class TimeType : public virtual ::apache::thrift::TBase {
   void __set_isAdjustedToUTC(const bool val);
 
   void __set_unit(const TimeUnit& val);
-
-  bool operator == (const TimeType & rhs) const;
-  bool operator != (const TimeType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const TimeType & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1146,13 +1030,6 @@ class IntType : public virtual ::apache::thrift::TBase {
 
   void __set_isSigned(const bool val);
 
-  bool operator == (const IntType & rhs) const;
-  bool operator != (const IntType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const IntType & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -1178,13 +1055,6 @@ class JsonType : public virtual ::apache::thrift::TBase {
 
   virtual ~JsonType() noexcept;
 
-  bool operator == (const JsonType & /* rhs */) const;
-  bool operator != (const JsonType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const JsonType & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -1209,13 +1079,6 @@ class BsonType : public virtual ::apache::thrift::TBase {
   BsonType() noexcept;
 
   virtual ~BsonType() noexcept;
-
-  bool operator == (const BsonType & /* rhs */) const;
-  bool operator != (const BsonType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const BsonType & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1304,13 +1167,6 @@ class LogicalType : public virtual ::apache::thrift::TBase {
   void __set_UUID(const UUIDType& val);
 
   void __set_FLOAT16(const Float16Type& val);
-
-  bool operator == (const LogicalType & rhs) const;
-  bool operator != (const LogicalType &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const LogicalType & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1432,13 +1288,6 @@ class SchemaElement : public virtual ::apache::thrift::TBase {
 
   void __set_logicalType(const LogicalType& val);
 
-  bool operator == (const SchemaElement & rhs) const;
-  bool operator != (const SchemaElement &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const SchemaElement & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -1509,13 +1358,6 @@ class DataPageHeader : public virtual ::apache::thrift::TBase {
 
   void __set_statistics(const Statistics& val);
 
-  bool operator == (const DataPageHeader & rhs) const;
-  bool operator != (const DataPageHeader &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const DataPageHeader & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -1535,13 +1377,6 @@ class IndexPageHeader : public virtual ::apache::thrift::TBase {
   IndexPageHeader() noexcept;
 
   virtual ~IndexPageHeader() noexcept;
-
-  bool operator == (const IndexPageHeader & /* rhs */) const;
-  bool operator != (const IndexPageHeader &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const IndexPageHeader & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1594,13 +1429,6 @@ class DictionaryPageHeader : public virtual ::apache::thrift::TBase {
   void __set_encoding(const Encoding::type val);
 
   void __set_is_sorted(const bool val);
-
-  bool operator == (const DictionaryPageHeader & rhs) const;
-  bool operator != (const DictionaryPageHeader &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const DictionaryPageHeader & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1693,13 +1521,6 @@ class DataPageHeaderV2 : public virtual ::apache::thrift::TBase {
 
   void __set_statistics(const Statistics& val);
 
-  bool operator == (const DataPageHeaderV2 & rhs) const;
-  bool operator != (const DataPageHeaderV2 &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const DataPageHeaderV2 & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -1722,13 +1543,6 @@ class SplitBlockAlgorithm : public virtual ::apache::thrift::TBase {
   SplitBlockAlgorithm() noexcept;
 
   virtual ~SplitBlockAlgorithm() noexcept;
-
-  bool operator == (const SplitBlockAlgorithm & /* rhs */) const;
-  bool operator != (const SplitBlockAlgorithm &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const SplitBlockAlgorithm & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1765,13 +1579,6 @@ class BloomFilterAlgorithm : public virtual ::apache::thrift::TBase {
 
   void __set_BLOCK(const SplitBlockAlgorithm& val);
 
-  bool operator == (const BloomFilterAlgorithm & rhs) const;
-  bool operator != (const BloomFilterAlgorithm &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const BloomFilterAlgorithm & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -1796,13 +1603,6 @@ class XxHash : public virtual ::apache::thrift::TBase {
   XxHash() noexcept;
 
   virtual ~XxHash() noexcept;
-
-  bool operator == (const XxHash & /* rhs */) const;
-  bool operator != (const XxHash &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const XxHash & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1841,13 +1641,6 @@ class BloomFilterHash : public virtual ::apache::thrift::TBase {
 
   void __set_XXHASH(const XxHash& val);
 
-  bool operator == (const BloomFilterHash & rhs) const;
-  bool operator != (const BloomFilterHash &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const BloomFilterHash & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -1871,13 +1664,6 @@ class Uncompressed : public virtual ::apache::thrift::TBase {
   Uncompressed() noexcept;
 
   virtual ~Uncompressed() noexcept;
-
-  bool operator == (const Uncompressed & /* rhs */) const;
-  bool operator != (const Uncompressed &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const Uncompressed & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1907,13 +1693,6 @@ class BloomFilterCompression : public virtual ::apache::thrift::TBase {
   _BloomFilterCompression__isset __isset;
 
   void __set_UNCOMPRESSED(const Uncompressed& val);
-
-  bool operator == (const BloomFilterCompression & rhs) const;
-  bool operator != (const BloomFilterCompression &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const BloomFilterCompression & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -1963,13 +1742,6 @@ class BloomFilterHeader : public virtual ::apache::thrift::TBase {
   void __set_hash(const BloomFilterHash& val);
 
   void __set_compression(const BloomFilterCompression& val);
-
-  bool operator == (const BloomFilterHeader & rhs) const;
-  bool operator != (const BloomFilterHeader &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const BloomFilterHeader & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2054,13 +1826,6 @@ class PageHeader : public virtual ::apache::thrift::TBase {
 
   void __set_data_page_header_v2(const DataPageHeaderV2& val);
 
-  bool operator == (const PageHeader & rhs) const;
-  bool operator != (const PageHeader &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const PageHeader & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -2095,13 +1860,6 @@ class KeyValue : public virtual ::apache::thrift::TBase {
   void __set_key(const std::string& val);
 
   void __set_value(const std::string& val);
-
-  bool operator == (const KeyValue & rhs) const;
-  bool operator != (const KeyValue &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const KeyValue & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2144,13 +1902,6 @@ class SortingColumn : public virtual ::apache::thrift::TBase {
   void __set_descending(const bool val);
 
   void __set_nulls_first(const bool val);
-
-  bool operator == (const SortingColumn & rhs) const;
-  bool operator != (const SortingColumn &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const SortingColumn & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2197,13 +1948,6 @@ class PageEncodingStats : public virtual ::apache::thrift::TBase {
 
   void __set_count(const int32_t val);
 
-  bool operator == (const PageEncodingStats & rhs) const;
-  bool operator != (const PageEncodingStats &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const PageEncodingStats & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -2247,11 +1991,11 @@ class ColumnMetaData : public virtual ::apache::thrift::TBase {
    * Set of all encodings used for this column. The purpose is to validate
    * whether we can decode those pages. *
    */
-  std::vector<Encoding::type>  encodings;
+  duckdb::vector<Encoding::type>  encodings;
   /**
    * Path in schema *
    */
-  std::vector<std::string>  path_in_schema;
+  duckdb::vector<std::string>  path_in_schema;
   /**
    * Compression codec *
    * 
@@ -2274,7 +2018,7 @@ class ColumnMetaData : public virtual ::apache::thrift::TBase {
   /**
    * Optional key/value metadata *
    */
-  std::vector<KeyValue>  key_value_metadata;
+  duckdb::vector<KeyValue>  key_value_metadata;
   /**
    * Byte offset from beginning of file to first data page *
    */
@@ -2296,7 +2040,7 @@ class ColumnMetaData : public virtual ::apache::thrift::TBase {
    * This information can be used to determine if all data pages are
    * dictionary encoded for example *
    */
-  std::vector<PageEncodingStats>  encoding_stats;
+  duckdb::vector<PageEncodingStats>  encoding_stats;
   /**
    * Byte offset from beginning of file to Bloom filter data. *
    */
@@ -2321,9 +2065,9 @@ class ColumnMetaData : public virtual ::apache::thrift::TBase {
 
   void __set_type(const Type::type val);
 
-  void __set_encodings(const std::vector<Encoding::type> & val);
+  void __set_encodings(const duckdb::vector<Encoding::type> & val);
 
-  void __set_path_in_schema(const std::vector<std::string> & val);
+  void __set_path_in_schema(const duckdb::vector<std::string> & val);
 
   void __set_codec(const CompressionCodec::type val);
 
@@ -2333,7 +2077,7 @@ class ColumnMetaData : public virtual ::apache::thrift::TBase {
 
   void __set_total_compressed_size(const int64_t val);
 
-  void __set_key_value_metadata(const std::vector<KeyValue> & val);
+  void __set_key_value_metadata(const duckdb::vector<KeyValue> & val);
 
   void __set_data_page_offset(const int64_t val);
 
@@ -2343,20 +2087,13 @@ class ColumnMetaData : public virtual ::apache::thrift::TBase {
 
   void __set_statistics(const Statistics& val);
 
-  void __set_encoding_stats(const std::vector<PageEncodingStats> & val);
+  void __set_encoding_stats(const duckdb::vector<PageEncodingStats> & val);
 
   void __set_bloom_filter_offset(const int64_t val);
 
   void __set_bloom_filter_length(const int32_t val);
 
   void __set_size_statistics(const SizeStatistics& val);
-
-  bool operator == (const ColumnMetaData & rhs) const;
-  bool operator != (const ColumnMetaData &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const ColumnMetaData & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2377,13 +2114,6 @@ class EncryptionWithFooterKey : public virtual ::apache::thrift::TBase {
   EncryptionWithFooterKey() noexcept;
 
   virtual ~EncryptionWithFooterKey() noexcept;
-
-  bool operator == (const EncryptionWithFooterKey & /* rhs */) const;
-  bool operator != (const EncryptionWithFooterKey &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const EncryptionWithFooterKey & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2411,7 +2141,7 @@ class EncryptionWithColumnKey : public virtual ::apache::thrift::TBase {
   /**
    * Column path in schema *
    */
-  std::vector<std::string>  path_in_schema;
+  duckdb::vector<std::string>  path_in_schema;
   /**
    * Retrieval metadata of column encryption key *
    */
@@ -2419,16 +2149,9 @@ class EncryptionWithColumnKey : public virtual ::apache::thrift::TBase {
 
   _EncryptionWithColumnKey__isset __isset;
 
-  void __set_path_in_schema(const std::vector<std::string> & val);
+  void __set_path_in_schema(const duckdb::vector<std::string> & val);
 
   void __set_key_metadata(const std::string& val);
-
-  bool operator == (const EncryptionWithColumnKey & rhs) const;
-  bool operator != (const EncryptionWithColumnKey &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const EncryptionWithColumnKey & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2462,13 +2185,6 @@ class ColumnCryptoMetaData : public virtual ::apache::thrift::TBase {
   void __set_ENCRYPTION_WITH_FOOTER_KEY(const EncryptionWithFooterKey& val);
 
   void __set_ENCRYPTION_WITH_COLUMN_KEY(const EncryptionWithColumnKey& val);
-
-  bool operator == (const ColumnCryptoMetaData & rhs) const;
-  bool operator != (const ColumnCryptoMetaData &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const ColumnCryptoMetaData & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2570,13 +2286,6 @@ class ColumnChunk : public virtual ::apache::thrift::TBase {
 
   void __set_encrypted_column_metadata(const std::string& val);
 
-  bool operator == (const ColumnChunk & rhs) const;
-  bool operator != (const ColumnChunk &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const ColumnChunk & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -2608,7 +2317,7 @@ class RowGroup : public virtual ::apache::thrift::TBase {
    * This list must have the same order as the SchemaElement list in FileMetaData.
    * 
    */
-  std::vector<ColumnChunk>  columns;
+  duckdb::vector<ColumnChunk>  columns;
   /**
    * Total byte size of all the uncompressed column data in this row group *
    */
@@ -2621,7 +2330,7 @@ class RowGroup : public virtual ::apache::thrift::TBase {
    * If set, specifies a sort ordering of the rows in this RowGroup.
    * The sorting columns can be a subset of all the columns.
    */
-  std::vector<SortingColumn>  sorting_columns;
+  duckdb::vector<SortingColumn>  sorting_columns;
   /**
    * Byte offset from beginning of file to first page (data or dictionary)
    * in this row group *
@@ -2639,26 +2348,19 @@ class RowGroup : public virtual ::apache::thrift::TBase {
 
   _RowGroup__isset __isset;
 
-  void __set_columns(const std::vector<ColumnChunk> & val);
+  void __set_columns(const duckdb::vector<ColumnChunk> & val);
 
   void __set_total_byte_size(const int64_t val);
 
   void __set_num_rows(const int64_t val);
 
-  void __set_sorting_columns(const std::vector<SortingColumn> & val);
+  void __set_sorting_columns(const duckdb::vector<SortingColumn> & val);
 
   void __set_file_offset(const int64_t val);
 
   void __set_total_compressed_size(const int64_t val);
 
   void __set_ordinal(const int16_t val);
-
-  bool operator == (const RowGroup & rhs) const;
-  bool operator != (const RowGroup &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RowGroup & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2682,13 +2384,6 @@ class TypeDefinedOrder : public virtual ::apache::thrift::TBase {
   TypeDefinedOrder() noexcept;
 
   virtual ~TypeDefinedOrder() noexcept;
-
-  bool operator == (const TypeDefinedOrder & /* rhs */) const;
-  bool operator != (const TypeDefinedOrder &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const TypeDefinedOrder & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2781,13 +2476,6 @@ class ColumnOrder : public virtual ::apache::thrift::TBase {
 
   void __set_TYPE_ORDER(const TypeDefinedOrder& val);
 
-  bool operator == (const ColumnOrder & rhs) const;
-  bool operator != (const ColumnOrder &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const ColumnOrder & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -2829,13 +2517,6 @@ class PageLocation : public virtual ::apache::thrift::TBase {
 
   void __set_first_row_index(const int64_t val);
 
-  bool operator == (const PageLocation & rhs) const;
-  bool operator != (const PageLocation &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const PageLocation & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -2870,27 +2551,20 @@ class OffsetIndex : public virtual ::apache::thrift::TBase {
    * PageLocations, ordered by increasing PageLocation.offset. It is required
    * that page_locations[i].first_row_index < page_locations[i+1].first_row_index.
    */
-  std::vector<PageLocation>  page_locations;
+  duckdb::vector<PageLocation>  page_locations;
   /**
    * Unencoded/uncompressed size for BYTE_ARRAY types.
    * 
    * See documention for unencoded_byte_array_data_bytes in SizeStatistics for
    * more details on this field.
    */
-  std::vector<int64_t>  unencoded_byte_array_data_bytes;
+  duckdb::vector<int64_t>  unencoded_byte_array_data_bytes;
 
   _OffsetIndex__isset __isset;
 
-  void __set_page_locations(const std::vector<PageLocation> & val);
+  void __set_page_locations(const duckdb::vector<PageLocation> & val);
 
-  void __set_unencoded_byte_array_data_bytes(const std::vector<int64_t> & val);
-
-  bool operator == (const OffsetIndex & rhs) const;
-  bool operator != (const OffsetIndex &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const OffsetIndex & ) const;
+  void __set_unencoded_byte_array_data_bytes(const duckdb::vector<int64_t> & val);
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -2934,7 +2608,7 @@ class ColumnIndex : public virtual ::apache::thrift::TBase {
    * byte[0], so that all lists have the same length. If false, the
    * corresponding entries in min_values and max_values must be valid.
    */
-  std::vector<bool>  null_pages;
+  duckdb::vector<bool>  null_pages;
   /**
    * Two lists containing lower and upper bounds for the values of each page
    * determined by the ColumnOrder of the column. These may be the actual
@@ -2945,8 +2619,8 @@ class ColumnIndex : public virtual ::apache::thrift::TBase {
    * logical type. Readers must make sure that list entries are populated before
    * using them by inspecting null_pages.
    */
-  std::vector<std::string>  min_values;
-  std::vector<std::string>  max_values;
+  duckdb::vector<std::string>  min_values;
+  duckdb::vector<std::string>  max_values;
   /**
    * Stores whether both min_values and max_values are ordered and if so, in
    * which direction. This allows readers to perform binary searches in both
@@ -2966,7 +2640,7 @@ class ColumnIndex : public virtual ::apache::thrift::TBase {
    * If null_counts are not present, readers MUST NOT assume all
    * null counts are 0.
    */
-  std::vector<int64_t>  null_counts;
+  duckdb::vector<int64_t>  null_counts;
   /**
    * Contains repetition level histograms for each page
    * concatenated together.  The repetition_level_histogram field on
@@ -2980,35 +2654,28 @@ class ColumnIndex : public virtual ::apache::thrift::TBase {
    * for the second page.
    * 
    */
-  std::vector<int64_t>  repetition_level_histograms;
+  duckdb::vector<int64_t>  repetition_level_histograms;
   /**
    * Same as repetition_level_histograms except for definitions levels.
    * 
    */
-  std::vector<int64_t>  definition_level_histograms;
+  duckdb::vector<int64_t>  definition_level_histograms;
 
   _ColumnIndex__isset __isset;
 
-  void __set_null_pages(const std::vector<bool> & val);
+  void __set_null_pages(const duckdb::vector<bool> & val);
 
-  void __set_min_values(const std::vector<std::string> & val);
+  void __set_min_values(const duckdb::vector<std::string> & val);
 
-  void __set_max_values(const std::vector<std::string> & val);
+  void __set_max_values(const duckdb::vector<std::string> & val);
 
   void __set_boundary_order(const BoundaryOrder::type val);
 
-  void __set_null_counts(const std::vector<int64_t> & val);
+  void __set_null_counts(const duckdb::vector<int64_t> & val);
 
-  void __set_repetition_level_histograms(const std::vector<int64_t> & val);
+  void __set_repetition_level_histograms(const duckdb::vector<int64_t> & val);
 
-  void __set_definition_level_histograms(const std::vector<int64_t> & val);
-
-  bool operator == (const ColumnIndex & rhs) const;
-  bool operator != (const ColumnIndex &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const ColumnIndex & ) const;
+  void __set_definition_level_histograms(const duckdb::vector<int64_t> & val);
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -3057,13 +2724,6 @@ class AesGcmV1 : public virtual ::apache::thrift::TBase {
 
   void __set_supply_aad_prefix(const bool val);
 
-  bool operator == (const AesGcmV1 & rhs) const;
-  bool operator != (const AesGcmV1 &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const AesGcmV1 & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -3111,13 +2771,6 @@ class AesGcmCtrV1 : public virtual ::apache::thrift::TBase {
 
   void __set_supply_aad_prefix(const bool val);
 
-  bool operator == (const AesGcmCtrV1 & rhs) const;
-  bool operator != (const AesGcmCtrV1 &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const AesGcmCtrV1 & ) const;
-
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
 
@@ -3150,13 +2803,6 @@ class EncryptionAlgorithm : public virtual ::apache::thrift::TBase {
   void __set_AES_GCM_V1(const AesGcmV1& val);
 
   void __set_AES_GCM_CTR_V1(const AesGcmCtrV1& val);
-
-  bool operator == (const EncryptionAlgorithm & rhs) const;
-  bool operator != (const EncryptionAlgorithm &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const EncryptionAlgorithm & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -3200,7 +2846,7 @@ class FileMetaData : public virtual ::apache::thrift::TBase {
    * used to map columns to nodes in the schema.
    * The first element is the root *
    */
-  std::vector<SchemaElement>  schema;
+  duckdb::vector<SchemaElement>  schema;
   /**
    * Number of rows in this file *
    */
@@ -3208,11 +2854,11 @@ class FileMetaData : public virtual ::apache::thrift::TBase {
   /**
    * Row groups in this file *
    */
-  std::vector<RowGroup>  row_groups;
+  duckdb::vector<RowGroup>  row_groups;
   /**
    * Optional key/value metadata *
    */
-  std::vector<KeyValue>  key_value_metadata;
+  duckdb::vector<KeyValue>  key_value_metadata;
   /**
    * String for application that wrote this file.  This should be in the format
    * <Application> version <App Version> (build <App Build Hash>).
@@ -3236,7 +2882,7 @@ class FileMetaData : public virtual ::apache::thrift::TBase {
    * The obsolete min and max fields in the Statistics object are always sorted
    * by signed comparison regardless of column_orders.
    */
-  std::vector<ColumnOrder>  column_orders;
+  duckdb::vector<ColumnOrder>  column_orders;
   /**
    * Encryption algorithm. This field is set only in encrypted files
    * with plaintext footer. Files with encrypted footer store algorithm id
@@ -3253,28 +2899,21 @@ class FileMetaData : public virtual ::apache::thrift::TBase {
 
   void __set_version(const int32_t val);
 
-  void __set_schema(const std::vector<SchemaElement> & val);
+  void __set_schema(const duckdb::vector<SchemaElement> & val);
 
   void __set_num_rows(const int64_t val);
 
-  void __set_row_groups(const std::vector<RowGroup> & val);
+  void __set_row_groups(const duckdb::vector<RowGroup> & val);
 
-  void __set_key_value_metadata(const std::vector<KeyValue> & val);
+  void __set_key_value_metadata(const duckdb::vector<KeyValue> & val);
 
   void __set_created_by(const std::string& val);
 
-  void __set_column_orders(const std::vector<ColumnOrder> & val);
+  void __set_column_orders(const duckdb::vector<ColumnOrder> & val);
 
   void __set_encryption_algorithm(const EncryptionAlgorithm& val);
 
   void __set_footer_signing_key_metadata(const std::string& val);
-
-  bool operator == (const FileMetaData & rhs) const;
-  bool operator != (const FileMetaData &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const FileMetaData & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
@@ -3319,13 +2958,6 @@ class FileCryptoMetaData : public virtual ::apache::thrift::TBase {
   void __set_encryption_algorithm(const EncryptionAlgorithm& val);
 
   void __set_key_metadata(const std::string& val);
-
-  bool operator == (const FileCryptoMetaData & rhs) const;
-  bool operator != (const FileCryptoMetaData &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const FileCryptoMetaData & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot) override;
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const override;
