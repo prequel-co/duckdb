@@ -169,8 +169,11 @@ Type::type ParquetWriter::DuckDBTypeToParquetType(const LogicalType &duckdb_type
 
 void ParquetWriter::SetSchemaProperties(const LogicalType &duckdb_type, duckdb_parquet::SchemaElement &schema_ele) {
 	if (duckdb_type.IsJSONType()) {
-		schema_ele.converted_type = ConvertedType::JSON;
-		schema_ele.__isset.converted_type = true;
+    schema_ele.converted_type = ConvertedType::JSON;
+    schema_ele.__isset.converted_type = true;
+    schema_ele.__isset.logicalType = true;
+    schema_ele.logicalType.__isset.JsonType = true;
+    schema_ele.logicalType.JsonType = {};
 		return;
 	}
 	switch (duckdb_type.id()) {
