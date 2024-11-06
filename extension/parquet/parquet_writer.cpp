@@ -174,7 +174,7 @@ void ParquetWriter::SetSchemaProperties(const LogicalType &duckdb_type, duckdb_p
 
         // Set logical type to JsonType
         schema_ele.__isset.logicalType = true;
-        schema_ele.logicalType.__set_JSON(JsonType());
+        schema_ele.logicalType.__set_JSON(duckdb_parquet::JsonType());
         return;
 		return;
 	}
